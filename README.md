@@ -1,5 +1,5 @@
 # system-code-xecutor
-SCX-PY is a python module and shell that can run scripts on both Unix systems and Windows.
+SCX-PY is a python module and shell that can run scripts as root on both Unix systems and Windows.
 
 scx has more features in its self that can be used either in a shell or in a .py file.
 
