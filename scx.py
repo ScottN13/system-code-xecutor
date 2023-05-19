@@ -2,8 +2,10 @@ import os
 import sys
 from configparser import ConfigParser
 import platform
-from termcolor import cprint, colored
+from rich.console import Console
+import requests as req
 
+console = Console()
 ver = "1.0"
 
 class scx:
@@ -18,7 +20,7 @@ class scx:
 
     def getOsInfo():
         print()
-        cprint("## OS Info:", "black", "on_light_green")
+        Console().print("[black on bright_green]## OS Info:")
         print(f"CPU Arhitecture: ",platform.machine())
         print(f"Device Network Name: ",platform.node())
         print(f"Device's Platform: ",platform.platform())
@@ -27,11 +29,26 @@ class scx:
 
         if sys.platform == "win32":
             print()
-            cprint("# Windows Detected!", "yellow")
+            console.print("[bright_yellow]# Windows Detected!")
             scx.WindowsGetInfo()
 
         elif sys.platform == "darwin":
             print()
-            cprint("# MacOS Detected!", "yellow")
+            console.print("[bright_yellow]# MacOS Detected!")
+
+    def fetch(args): 
+        if args == ("ip"):
+            url: str = "https://checkip.amazonaws.com"
+            request = req.get(url)
+            ip: str = request.text
+            console.print("[bold][black on bright_yellow]IP:[/] ", ip)
+
+        elif args == ("file"):
+            print("Please input path")
+            path = input("fetch>file>")
+            with open(path, "r") as file:
+                print(file.readlines)
+
+        elif args == (""): ...
 
         
