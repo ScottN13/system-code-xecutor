@@ -5,10 +5,22 @@ import platform
 from rich.console import Console
 import requests as req
 
+# Variables and misc.
 console = Console()
-ver = "1.0"
+config = ConfigParser(delimiters="=", comment_prefixes="#")
+config.read("data/main.ini")
+ver = str(config["MAIN"]["version"])
+branch = str(config["MAIN"]["branch"])
 
 class scx:
+    
+    def __init__(self):
+        self.version = ver
+        self.branch = branch
+        self.os = sys.platform()
+        console.print(f"[bright_green]# SCX Succesful!","\n[bright_yellow]Welcome to system-code-xecutor!")
+
+
     def about():
         print(f"scx-py version ",ver,)
         print(f"created by ValkTheBoxman")
@@ -49,6 +61,15 @@ class scx:
             with open(path, "r") as file:
                 print(file.readlines)
 
-        elif args == (""): ...
+        elif args == ("webscrape"): ...
+
+    def script(perm, path):
+        if perm == "root":
+            ...
+        elif perm == "usr":
+            ...
+
+    def shell(): ...    
+    
 
         
