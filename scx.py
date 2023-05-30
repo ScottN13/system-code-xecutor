@@ -18,12 +18,17 @@ class scx:
         self.version = ver
         self.branch = branch
         self.os = sys.platform()
+        self.nr = ...
         console.print(f"[bright_green]# SCX Succesful!","\n[bright_yellow]Welcome to system-code-xecutor!")
+
+    def log(str):
+        print("log started")
+        with open(f"data/logs/log{scx.nr}", "a"):
+            ...
 
 
     def about():
-        print(f"scx-py version ",ver,)
-        print(f"created by ValkTheBoxman")
+        print(f"scx-py version ",ver,branch,"\ncreated by @ScottN13")
 
     def WindowsGetInfo():
         print("Windows Version :",platform.version())
