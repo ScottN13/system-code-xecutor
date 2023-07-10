@@ -1,3 +1,3 @@
 from scx import *
 
-scx.about()
+scx.getOsInfo()

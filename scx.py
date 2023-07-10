@@ -4,6 +4,8 @@ from configparser import ConfigParser
 import platform
 from rich.console import Console
 import requests as req
+from timeit import default_timer as timer
+import subprocess
 
 # Variables and misc.
 console = Console()
@@ -36,17 +38,20 @@ class scx:
         print("Is Windows Ver IoT?: ",platform.win32_is_iot())
 
     def getOsInfo():
+        start = timer()
         print()
         Console().print("[black on bright_green]## OS Info:")
-        print(f"CPU Arhitecture: ",platform.machine())
-        print(f"Device Network Name: ",platform.node())
-        print(f"Device's Platform: ",platform.platform())
-        print(f"CPU Name: ",platform.processor())
-        print(f"Device Platform Version: ",platform.release())
+        print("CPU Arhitecture: ",platform.machine())
+        print("Device Network Name: ",platform.node())
+        print("Device's Platform: ",platform.platform())
+        print("CPU Name: ",platform.processor())
+        print("Device Platform Version: ",platform.release())
+        end = timer()
+        Console().print(f"[black on bright_green]# Success! in {end-start}")
 
         if sys.platform == "win32":
             print()
-            console.print("[bright_yellow]# Windows Detected!")
+            console.print("\n[bright_yellow]# Windows Detected!")
             scx.WindowsGetInfo()
 
         elif sys.platform == "darwin":
@@ -54,11 +59,14 @@ class scx:
             console.print("[bright_yellow]# MacOS Detected!")
 
     def fetch(args): 
+        start = timer()
         if args == ("ip"):
             url: str = "https://checkip.amazonaws.com"
             request = req.get(url)
             ip: str = request.text
             console.print("[bold][black on bright_yellow]IP:[/] ", ip)
+            end = timer()
+            Console().print(f"[black on bright_green]# Success! in {end-start}")
 
         elif args == ("file"):
             print("Please input path")
@@ -68,13 +76,16 @@ class scx:
 
         elif args == ("webscrape"): ...
 
-    def script(perm, path):
+    def script(perm, path, type):
         if perm == "root":
             ...
         elif perm == "usr":
             ...
 
-    def shell(): ...    
-    
+    def shell(): ...
 
-        
+    def command(cmd):
+        start = timer()
+        subprocess.run(cmd)
+        end = timer()
+        Console().print(f"[black on bright_green]# Task ended in {end - start}")       
